@@ -20,10 +20,11 @@ message(STATUS "Driver version - ${DRIVER_VERSION}")
 message(STATUS "Driver identifier - ${DRIVER_IDENTIFIER}")
 message(STATUS "Driver codesign ID - ${CODESIGN_ID}")
 
-# libASPL (built as ExternalProject)
-get_filename_component(LIBASPL_SOURCE_DIR
-  ${CMAKE_CURRENT_LIST_DIR}/../libASPL
-  ABSOLUTE)
+# libASPL (git submodule under external/, built as ExternalProject)
+set(LIBASPL_SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/external/libASPL)
+if(NOT EXISTS ${LIBASPL_SOURCE_DIR}/CMakeLists.txt)
+  message(FATAL_ERROR "libASPL fehlt (Submodule): git submodule update --init")
+endif()
 
 set(LIBASPL_TARGET FocalHiRes_libASPL)
 include(ExternalProject)

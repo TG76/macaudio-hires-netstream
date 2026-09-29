@@ -32,10 +32,10 @@ An example Python receiver that pipes the stream into `aplay` on a Raspberry Pi 
 
 Prerequisites: macOS (tested on arm64 / Apple Silicon), Xcode command-line tools, CMake 3.12+.
 
-Clone [libASPL](https://github.com/gavv/libASPL) as a **sibling directory** to this repo — `CMakeLists.txt` expects it at `../libASPL/`:
+[libASPL](https://github.com/gavv/libASPL) is a git submodule at `external/libASPL/`. After cloning this repo, fetch it:
 
 ```bash
-git clone https://github.com/gavv/libASPL ../libASPL
+git submodule update --init
 ./install.sh
 ```
 

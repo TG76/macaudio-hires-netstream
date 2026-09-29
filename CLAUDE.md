@@ -3,7 +3,7 @@
 macOS AudioServerPlugin (CoreAudio HAL), streamt 192 kHz/32 bit Float per TCP an den Audio Pi (`tg@192.168.1.74:4953`). Erscheint als **"Focal HiRes"** im macOS-Ausgabe-Menü.
 
 ## Architektur
-- **Framework:** libASPL (Sibling-Projekt `~/ClaudeProjekte/libASPL/`), statisch gelinkt via CMake ExternalProject.
+- **Framework:** libASPL, unveränderter Klon von github.com/gavv/libASPL (Stand `633e0f7`, main) als **git submodule** unter `external/libASPL/` — reine Abhängigkeit, kein eigenes Projekt; statisch gelinkt via CMake ExternalProject. Nach frischem Clone `git submodule update --init`. Bis 29.09.2026 lag es als Sibling unter `~/ClaudeProjekte/libASPL/`.
 - **Bundle:** `/Library/Audio/Plug-Ins/HAL/FocalHiRes.driver` (ad-hoc codesigniert, CFBundleIdentifier `com.tg.focalhires`, Factory-UUID `A7B3C1D2-E4F5-6789-ABCD-EF0123456789`).
 - **Audio-Format:** Float32 LE 192 kHz stereo (macOS-seitig). Auf dem Weg zum Pi: Float32 → S32LE (clamped, NaN→0) in `ConvertFloat32ToS32LE`.
 - **Protokoll:** 16-Byte Header (`"HRES"`, rate, bits, channels) + PCM-Stream. TCP_NODELAY, SO_SNDBUF=256k.
